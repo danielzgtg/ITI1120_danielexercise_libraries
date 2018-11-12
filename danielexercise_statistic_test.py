@@ -5,7 +5,7 @@ import unittest
 from danielexercise_statistic import histogram, sorted_dict_pairs
 
 
-class TestMatrixMethods(unittest.TestCase):
+class TestStatisticMethods(unittest.TestCase):
     def test_histogram_handout1(self):
         text = "les saucisses et saucissons secs sont dans le saloir"
         hist_expected = {
