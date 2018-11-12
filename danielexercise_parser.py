@@ -39,10 +39,19 @@ parse_int.__doc__ = """
 
 parse_float = generate_parser("decimal", int)
 parse_float.__doc__ = """
-    parse_float(prompt: float) -> result: float
+    parse_float(prompt: str) -> result: float
 
     Prompts the command line for a floating-point number and returns it.
     If the input is not a valid floating-point number, this function keeps on trying again.
+    """
+
+
+parse_str = generate_parser("text", lambda x: x)
+parse_str.__doc__ = """
+    parse_str(prompt: str) -> result: str
+
+    Prompts the command line for some text and returns it.
+    This should never error.
     """
 
 
