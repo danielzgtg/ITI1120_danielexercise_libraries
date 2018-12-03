@@ -6,6 +6,24 @@ import random
 from danielexercise_abstractmocker import MockerBase
 
 
+def are_permutations(list1: List, list2: List) -> bool:
+    """
+    are_permutations(list1: List, list2: List) -> are_permutations: bool
+
+    Return True iff the two lists are permutations of each other.
+    This uses an alternative algorithm so that the items only need to implement __eq__.
+    The simpler algorithm would just to sort and check if the list are equal.
+    """
+    l1 = list1.copy()
+    l2 = list2.copy()
+    for x in l1:
+        try:
+            l2.remove(x)
+        except ValueError:
+            return False
+    return not bool(l2)
+
+
 class RandomMocker(MockerBase):
     _randrange_buf: deque
     _shuffle_buf: deque
@@ -38,7 +56,7 @@ class RandomMocker(MockerBase):
         def fake_shuffle(x, random=None):
             tester.assertTrue(self._shuffle_buf)
             result = self._shuffle_buf.popleft()
-            tester.assertTrue(sorted(x) == sorted(result))
+            tester.assertTrue(are_permutations(x, result))
             x.clear()
             x.extend(result)
         self._backup_shuffle = random.shuffle
